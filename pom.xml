@@ -1,8 +1,16 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
+  
+  <properties>
+    <net-lecousin-parent-pom-version>0.3-SNAPSHOT</net-lecousin-parent-pom-version>
+  	<maven-checkstyle-version>2.17</maven-checkstyle-version>
+  	<maven-spotbugs-version>3.1.0-RC4</maven-spotbugs-version>
+  	<spotbugs-version>3.1.0-RC4</spotbugs-version>
+  </properties>
+  
   <groupId>net.lecousin</groupId>
   <artifactId>parent-pom</artifactId>
-  <version>0.2</version>
+  <version>${net-lecousin-parent-pom-version}</version>
   <packaging>pom</packaging>
   
   <name>lecousin.net parent POM</name>
@@ -42,11 +50,6 @@
     </snapshotRepository>
   </distributionManagement>
   
-  <properties>
-  	<maven-checkstyle-version>2.17</maven-checkstyle-version>
-  	<maven-spotbugs-version>3.1.0-RC4</maven-spotbugs-version>
-  	<spotbugs-version>3.1.0-RC4</spotbugs-version>
-  </properties>
   <dependencyManagement>
   	<dependencies>
   		<dependency>
@@ -87,7 +90,7 @@
   								<artifactItem>
   									<groupId>net.lecousin</groupId>
   									<artifactId>parent-pom</artifactId>
-  									<version>0.1</version>
+  									<version>${net-lecousin-parent-pom-version}</version>
   									<type>zip</type>
   									<classifier>resources-files</classifier>
   									<overWrite>true</overWrite>
