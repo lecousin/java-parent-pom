@@ -4,6 +4,44 @@
   <artifactId>parent-pom</artifactId>
   <version>0.1</version>
   <packaging>pom</packaging>
+  
+  <name>lecousin.net parent POM</name>
+  <description>This POM defines common properties and plugins for other projects, such as checkstyle, spotbugs or Java version</description>
+  <url>https://github.com/lecousin/java-parent-pom</url>
+  
+  <licenses>
+    <license>
+      <name>Apache 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+    
+  <developers>
+    <developer>
+    	<id>lecousin</id>
+    	<name>Guillaume Le Cousin</name>
+    </developer>
+  </developers>
+  
+  <scm>
+    <connection>scm:git:https://github.com/lecousin/java-parent-pom.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com:lecousin/java-parent-pom.git</developerConnection>
+    <url>https://github.com/lecousin/java-parent-pom</url>
+    <tag>HEAD</tag>
+  </scm>
+  
+  <distributionManagement>
+    <repository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+    </repository>
+    <snapshotRepository>
+        <id>ossrh</id>
+        <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+    </snapshotRepository>
+  </distributionManagement>
+  
   <properties>
   	<maven-checkstyle-version>2.17</maven-checkstyle-version>
   	<maven-spotbugs-version>3.1.0-RC4</maven-spotbugs-version>
@@ -120,6 +158,21 @@
   				</execution>
   			</executions>
   		</plugin>
+  		
+  		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-gpg-plugin</artifactId>
+			<version>1.5</version>
+			<executions>
+				<execution>
+					<id>sign-artifacts</id>
+					<phase>verify</phase>
+					<goals>
+						<goal>sign</goal>
+					</goals>
+				</execution>
+			</executions>
+		</plugin>
   	</plugins>
   </build>
 </project>
