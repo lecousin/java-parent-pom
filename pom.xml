@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   
   <properties>
-    <net-lecousin-parent-pom-version>0.5</net-lecousin-parent-pom-version>
+    <net-lecousin-parent-pom-version>0.6</net-lecousin-parent-pom-version>
   	<maven-checkstyle-version>2.17</maven-checkstyle-version>
 	<checkstyle-version>8.5</checkstyle-version>
   	<maven-spotbugs-version>3.1.0</maven-spotbugs-version>
@@ -139,7 +139,7 @@
   						<id>verify-spotbugs</id>
   						<phase>verify</phase>
   						<goals>
-  							<goal>findbugs</goal>
+  							<goal>spotbugs</goal>
   						</goals>
   						<configuration>
   							<xmlOutput>true</xmlOutput>
