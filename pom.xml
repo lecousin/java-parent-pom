@@ -2,11 +2,11 @@
   <modelVersion>4.0.0</modelVersion>
   
   <properties>
-    <net-lecousin-parent-pom-version>0.3</net-lecousin-parent-pom-version>
+    <net-lecousin-parent-pom-version>0.4</net-lecousin-parent-pom-version>
   	<maven-checkstyle-version>2.17</maven-checkstyle-version>
-	<checkstyle-version>7.8.2</checkstyle-version>
-  	<maven-spotbugs-version>3.1.0-RC4</maven-spotbugs-version>
-  	<spotbugs-version>3.1.0-RC4</spotbugs-version>
+	<checkstyle-version>8.5</checkstyle-version>
+  	<maven-spotbugs-version>3.1.1</maven-spotbugs-version>
+  	<spotbugs-version>3.1.0</spotbugs-version>
   </properties>
   
   <groupId>net.lecousin</groupId>
@@ -131,7 +131,7 @@
   				</executions>
   			</plugin>
   			<plugin>
-  				<groupId>com.github.hazendaz.spotbugs</groupId>
+  				<groupId>com.github.spotbugs</groupId>
   				<artifactId>spotbugs-maven-plugin</artifactId>
   				<version>${maven-spotbugs-version}</version>
   				<executions>

@@ -17,11 +17,6 @@
         </module>
          -->
 
-    <module name="SuppressionCommentFilter">
-    	<property name="offCommentFormat" value="skip checkstyle\: ([\w\|]+)"/>
-    	<property name="checkFormat" value="$1"/>
-    </module>
-
     <!-- Checks that a package-info.java file exists for each package.     -->
     <!-- See http://checkstyle.sf.net/config_javadoc.html#JavadocPackage -->
     <module name="JavadocPackage"/>
@@ -31,7 +26,10 @@
     <module name="NewlineAtEndOfFile"/>
 
     <module name="TreeWalker">
-    	<module name="FileContentsHolder"/>
+	    <module name="SuppressionCommentFilter">
+	    	<property name="offCommentFormat" value="skip checkstyle\: ([\w\|]+)"/>
+	    	<property name="checkFormat" value="$1"/>
+	    </module>
     	
         <module name="OuterTypeFilename"/>
         <module name="IllegalTokenText">
@@ -186,7 +184,6 @@
             <property name="allowedAbbreviationLength" value="3"/>
         </module>
         <module name="OverloadMethodsDeclarationOrder"/>
-        <module name="VariableDeclarationUsageDistance"/>
         <module name="CustomImportOrder">
             <property name="sortImportsInGroupAlphabetically" value="true"/>
             <property name="separateLineBetweenGroups" value="true"/>
