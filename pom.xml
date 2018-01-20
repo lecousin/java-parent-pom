@@ -1,18 +1,23 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   
-  <properties>
-    <net-lecousin-parent-pom-version>0.6</net-lecousin-parent-pom-version>
-  	<maven-checkstyle-version>2.17</maven-checkstyle-version>
-	<checkstyle-version>8.5</checkstyle-version>
-  	<maven-spotbugs-version>3.1.0</maven-spotbugs-version>
-  	<spotbugs-version>3.1.0</spotbugs-version>
-  </properties>
-  
   <groupId>net.lecousin</groupId>
   <artifactId>parent-pom</artifactId>
-  <version>${net-lecousin-parent-pom-version}</version>
+  <version>0.7</version>
   <packaging>pom</packaging>
+  
+  <properties>
+    <net-lecousin-parent-pom-version>0.7</net-lecousin-parent-pom-version>
+    <maven-compiler-version>3.7.0</maven-compiler-version>
+    <maven-jar-version>3.0.2</maven-jar-version>
+    <maven-source-version>3.0.1</maven-source-version>
+    <maven-javadoc-version>3.0.0</maven-javadoc-version>
+  	<maven-checkstyle-version>3.0.0</maven-checkstyle-version>
+	<checkstyle-version>8.7</checkstyle-version>
+  	<maven-spotbugs-version>3.1.1</maven-spotbugs-version>
+  	<spotbugs-version>3.1.1</spotbugs-version>
+  	<maven-jacoco-version>0.8.0</maven-jacoco-version>
+  </properties>
   
   <name>lecousin.net parent POM</name>
   <description>This POM defines common properties and plugins for other projects, such as checkstyle, spotbugs or Java version</description>
@@ -60,12 +65,13 @@
   		</dependency>
   	</dependencies>
   </dependencyManagement>
+  
   <build>
   	<pluginManagement>
   		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.6.2</version>
+				<version>${maven-compiler-version}</version>
 				<configuration>
 					<source>1.8</source>
 					<target>1.8</target>
@@ -73,12 +79,37 @@
 			</plugin>
 			<plugin>
 				<artifactId>maven-jar-plugin</artifactId>
-				<version>3.0.2</version>
+				<version>${maven-jar-version}</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>${maven-source-version}</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals><goal>jar-no-fork</goal></goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>${maven-javadoc-version}</version>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<goals><goal>jar</goal></goals>
+						<configuration>
+							<additionalOptions>-Xdoclint:none</additionalOptions>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
   			<plugin>
   				<groupId>org.apache.maven.plugins</groupId>
   				<artifactId>maven-dependency-plugin</artifactId>
-  				<version>3.0.1</version>
+  				<version>3.0.2</version>
   				<executions>
   					<execution>
   						<id>unpack-parent-resources</id>
@@ -130,6 +161,7 @@
   					</execution>
   				</executions>
   			</plugin>
+  			<!-- 
   			<plugin>
   				<groupId>com.github.spotbugs</groupId>
   				<artifactId>spotbugs-maven-plugin</artifactId>
@@ -147,12 +179,19 @@
   					</execution>
   				</executions>
   			</plugin>
+  			 -->
+  			<plugin>
+  				<groupId>org.jacoco</groupId>
+  				<artifactId>jacoco-maven-plugin</artifactId>
+  				<version>${maven-jacoco-version}</version>
+  			</plugin>
   		</plugins>
   	</pluginManagement>
   	
   	<plugins>
   		<plugin>
   			<artifactId>maven-assembly-plugin</artifactId>
+  			<version>3.1.0</version>
   			<inherited>false</inherited>
   			<configuration>
   				<descriptors>
@@ -173,6 +212,57 @@
   </build>
   
   <profiles>
+	<profile>
+		<id>default</id>
+		<activation>
+			<activeByDefault>true</activeByDefault>
+		</activation>
+		<build>
+			<plugins>
+				<plugin>
+					<groupId>org.jacoco</groupId>
+					<artifactId>jacoco-maven-plugin</artifactId>
+					<executions>
+						<execution>
+							<goals>
+								<goal>prepare-agent</goal>
+							</goals>
+						</execution>
+						<execution>
+							<id>report</id>
+							<phase>test</phase>
+							<goals>
+								<goal>report</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+  				<plugin>
+  					<groupId>org.apache.maven.plugins</groupId>
+  					<artifactId>maven-dependency-plugin</artifactId>
+  					<executions>
+  						<execution>
+  							<id>unpack-parent-resources</id>
+  						</execution>
+  					</executions>
+  				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-checkstyle-plugin</artifactId>
+				</plugin>
+				<!-- 
+				<plugin>
+					<groupId>com.github.spotbugs</groupId>
+					<artifactId>spotbugs-maven-plugin</artifactId>
+				</plugin>
+				 -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-javadoc-plugin</artifactId>
+				</plugin>
+			</plugins>
+		</build>
+	</profile>
     <profile>
         <id>ossrh</id>
         <activation>
@@ -196,6 +286,14 @@
 							</goals>
 						</execution>
 					</executions>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-source-plugin</artifactId>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-javadoc-plugin</artifactId>
 				</plugin>
         	</plugins>
         </build>
