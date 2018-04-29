@@ -3,7 +3,7 @@
   
   <groupId>net.lecousin</groupId>
   <artifactId>parent-pom</artifactId>
-  <version>0.7</version>
+  <version>0.8</version>
   <packaging>pom</packaging>
   
   <properties>
@@ -298,5 +298,37 @@
         	</plugins>
         </build>
     </profile>
+    
+  	<profile>
+  		<id>attach-lc-project</id>
+  		<activation>
+  			<file><exists>${basedir}/lc-project.xml</exists></file>
+  		</activation>
+  		<build>
+  			<plugins>
+  				<plugin>
+  					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>build-helper-maven-plugin</artifactId>
+					<version>3.0.0</version>
+					<executions>
+						<execution>
+							<id>attach-lc-artifacts</id>
+							<phase>package</phase>
+							<goals><goal>attach-artifact</goal></goals>
+							<configuration>
+								<artifacts>
+									<artifact>
+										<file>${basedir}/lc-project.xml</file>
+										<type>xml</type>
+										<classifier>lc-project</classifier>
+									</artifact>
+								</artifacts>
+							</configuration>
+						</execution>
+					</executions>
+  				</plugin>
+  			</plugins>
+  		</build>
+  	</profile>
   </profiles>
 </project>
