@@ -3,16 +3,16 @@
   
   <groupId>net.lecousin</groupId>
   <artifactId>parent-pom</artifactId>
-  <version>20191012</version>
+  <version>20191012.1</version>
   <packaging>pom</packaging>
   
   <properties>
-    <net-lecousin-parent-pom-version>20191012</net-lecousin-parent-pom-version>
+    <net-lecousin-parent-pom-version>20191012.1</net-lecousin-parent-pom-version>
     <maven-compiler-version>3.8.1</maven-compiler-version>
     <maven-jar-version>3.0.2</maven-jar-version>
     <maven-source-version>3.0.1</maven-source-version>
     <maven-javadoc-version>3.0.0</maven-javadoc-version>
-  	<maven-checkstyle-version>3.0.1</maven-checkstyle-version>
+  	<maven-checkstyle-version>3.1.0</maven-checkstyle-version>
 	<checkstyle-version>8.25</checkstyle-version>
   	<maven-jacoco-version>0.8.4</maven-jacoco-version>
   	<maven-gpg-plugin-version>1.6</maven-gpg-plugin-version>
